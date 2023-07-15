@@ -2,6 +2,9 @@ package gr.aueb.cf.schoolapp.service.exceptions;
 
 import gr.aueb.cf.schoolapp.model.Student;
 
+/**
+ * A custom exception if student not found.
+ */
 public class StudentNotFoundException extends Exception {
     private static final long serialVersionUID = 123456L;
 

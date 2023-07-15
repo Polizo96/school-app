@@ -1,5 +1,8 @@
 package gr.aueb.cf.schoolapp.model;
 
+/**
+ * A teacher Java Bean.
+ */
 public class Teacher {
     private Integer id;
     private String firstname;

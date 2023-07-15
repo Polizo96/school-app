@@ -13,11 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TeacherDAOImpl implements ITeacherDAO{
+
     /**
+     * Inserts a teacher to the Database.
      *
      * @param teacher
+     *                  the given teacher.
      * @return
+     *                  the teacher.
      * @throws TeacherDAOException
+     *                  if SQL error in insert.
      */
     @Override
     public Teacher insert(Teacher teacher) throws TeacherDAOException {
@@ -44,6 +49,16 @@ public class TeacherDAOImpl implements ITeacherDAO{
         }
     }
 
+    /**
+     * Updates a teacher to the Database.
+     *
+     * @param teacher
+     *              the given teacher.
+     * @return
+     *              the teacher.
+     * @throws TeacherDAOException
+     *              if SQL error in update.
+     */
     @Override
     public Teacher update(Teacher teacher) throws TeacherDAOException {
         String sql = "UPDATE TEACHERS SET FIRSTNAME = ?, LASTNAME = ? WHERE ID = ?";
@@ -72,6 +87,14 @@ public class TeacherDAOImpl implements ITeacherDAO{
         }
     }
 
+    /**
+     * Deletes a teacher by id from the Database.
+     *
+     * @param id
+     *              the given id of the teacher.
+     * @throws TeacherDAOException
+     *              if SQL error in delete.
+     */
     @Override
     public void delete(int id) throws TeacherDAOException {
         String sql = "DELETE FROM TEACHERS WHERE ID = ?";
@@ -95,6 +118,16 @@ public class TeacherDAOImpl implements ITeacherDAO{
         }
     }
 
+    /**
+     * Gets a list with the teachers by lastname.
+     *
+     * @param lastname
+     *              the given lastname.
+     * @return
+     *              the list of teachers.
+     * @throws TeacherDAOException
+     *              if SQL error in get by lastname.
+     */
     @Override
     public List<Teacher> getByLastname(String lastname) throws TeacherDAOException {
         String sql = "SELECT * FROM TEACHERS WHERE LASTNAME LIKE ?";
@@ -126,6 +159,16 @@ public class TeacherDAOImpl implements ITeacherDAO{
         return teachers;
     }
 
+    /**
+     * Gets a teacher by id.
+     *
+     * @param id
+     *              the id of the teacher.
+     * @return
+     *              the teacher.
+     * @throws TeacherDAOException
+     *              if SQL error in get by id.
+     */
     @Override
     public Teacher getById(int id) throws TeacherDAOException {
         String sql = "SELECT * FROM TEACHERS WHERE ID = ?";

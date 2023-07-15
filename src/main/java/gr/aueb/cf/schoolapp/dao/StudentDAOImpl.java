@@ -13,6 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDAOImpl implements IStudentDAO{
+
+    /**
+     * Inserts a student to the Database.
+     *
+     * @param student
+     *                  the given student.
+     * @return
+     *                  the student.
+     * @throws StudentDAOException
+     *                  if SQL error in insert.
+     */
     @Override
     public Student insert(Student student) throws StudentDAOException {
         String sql = "INSERT INTO STUDENTS (FIRSTNAME, LASTNAME) VALUES (?, ?)";
@@ -38,7 +49,16 @@ public class StudentDAOImpl implements IStudentDAO{
         }
     }
 
-
+    /**
+     * Updates a student to the Database.
+     *
+     * @param student
+     *              the given student.
+     * @return
+     *              the student.
+     * @throws StudentDAOException
+     *              if SQL error in update.
+     */
     @Override
     public Student update(Student student) throws StudentDAOException {
         String sql = "UPDATE STUDENTS SET FIRSTNAME = ?, LASTNAME = ? WHERE ID = ?";
@@ -67,6 +87,14 @@ public class StudentDAOImpl implements IStudentDAO{
         }
     }
 
+    /**
+     * Deletes a student by id from the Database.
+     *
+     * @param id
+     *              the id of the student to be deleted.
+     * @throws StudentDAOException
+     *              if SQL error in delete.
+     */
     @Override
     public void delete(int id) throws StudentDAOException {
         String sql = "DELETE FROM STUDENTS WHERE ID = ?";
@@ -90,6 +118,16 @@ public class StudentDAOImpl implements IStudentDAO{
         }
     }
 
+    /**
+     * Gets a list with the students by lastname.
+     *
+     * @param lastname
+     *              the given lastname.
+     * @return
+     *              the list of students.
+     * @throws StudentDAOException
+     *              if SQL error in get by lastname.
+     */
     @Override
     public List<Student> getByLastname(String lastname) throws StudentDAOException {
         String sql = "SELECT * FROM STUDENTS WHERE LASTNAME LIKE ?";
@@ -121,6 +159,16 @@ public class StudentDAOImpl implements IStudentDAO{
         return students;
     }
 
+    /**
+     * Gets a student by id.
+     *
+     * @param id
+     *              the id of the student.
+     * @return
+     *              the student.
+     * @throws StudentDAOException
+     *              if SQL error in get by id.
+     */
     @Override
     public Student getById(int id) throws StudentDAOException {
         String sql = "SELECT * FROM STUDENTS WHERE ID = ?";

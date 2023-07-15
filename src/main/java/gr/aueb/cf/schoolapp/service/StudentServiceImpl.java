@@ -14,6 +14,16 @@ public class StudentServiceImpl implements IStudentService{
 
     public StudentServiceImpl(IStudentDAO studentDAO) { this.studentDAO = studentDAO; }
 
+    /**
+     * Inserts a student to the database.
+     *
+     * @param dto
+     *          the student to be inserted.
+     * @return
+     *          the student.
+     * @throws StudentDAOException
+     *          if SQL error in insert.
+     */
     @Override
     public Student insertStudent(StudentInsertDTO dto) throws StudentDAOException {
         if (dto == null) return null;
@@ -28,6 +38,18 @@ public class StudentServiceImpl implements IStudentService{
         }
     }
 
+    /**
+     * Updates a student to the database.
+     *
+     * @param dto
+     *          the student to be updated.
+     * @return
+     *          the student.
+     * @throws StudentDAOException
+     *          if SQL error in update.
+     * @throws StudentNotFoundException
+     *          if student not found.
+     */
     @Override
     public Student updateStudent(StudentUpdateDTO dto) throws StudentDAOException, StudentNotFoundException {
         if (dto == null) return null;
@@ -45,6 +67,16 @@ public class StudentServiceImpl implements IStudentService{
         }
     }
 
+    /**
+     * Deletes a student from the database by student's id.
+     *
+     * @param id
+     *          the id of the student to be deleted.
+     * @throws StudentDAOException
+     *          if SQL error in delete.
+     * @throws StudentNotFoundException
+     *          if student not found.
+     */
     @Override
     public void deleteStudent(int id) throws StudentDAOException, StudentNotFoundException {
         Student student;
@@ -62,6 +94,16 @@ public class StudentServiceImpl implements IStudentService{
         }
     }
 
+    /**
+     * Gets a list with the students by lastname.
+     *
+     * @param lastname
+     *              the lastname of students.
+     * @return
+     *              the list of students.
+     * @throws StudentDAOException
+     *              if SQL error in getting from database.
+     */
     @Override
     public List<Student> getStudentsByLastname(String lastname) throws StudentDAOException {
         List<Student> students;
@@ -75,6 +117,18 @@ public class StudentServiceImpl implements IStudentService{
         }
     }
 
+    /**
+     * Gets a student by id from the database.
+     *
+     * @param id
+     *          the id of the student.
+     * @return
+     *          the student.
+     * @throws StudentDAOException
+     *          if SQL error in getting from database.
+     * @throws StudentNotFoundException
+     *          if student not found.
+     */
     @Override
     public Student getStudentById(int id) throws StudentDAOException, StudentNotFoundException {
         Student student;
@@ -91,10 +145,26 @@ public class StudentServiceImpl implements IStudentService{
         }
     }
 
+    /**
+     * Maps a {@link StudentInsertDTO} to a {@link Student}.
+     *
+     * @param dto
+     *              the StudentInsertDTO obj.
+     * @return
+     *              the Student obj.
+     */
     private Student map(StudentInsertDTO dto) {
         return new Student(null, dto.getFirstname(), dto.getLastname());
     }
 
+    /**
+     * Maps a {@link StudentUpdateDTO} to a {@link Student}.
+     *
+     * @param dto
+     *              the StudentUpdateDTO obj.
+     * @return
+     *              the Student obj.
+     */
     private Student map(StudentUpdateDTO dto) {
         return new Student(dto.getId(), dto.getFirstname(), dto.getLastname());
     }

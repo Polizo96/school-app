@@ -16,6 +16,16 @@ public class TeacherServiceImpl implements ITeacherService {
         this.teacherDAO = teacherDAO;
     }
 
+    /**
+     * Inserts a teacher to the database.
+     *
+     * @param dto
+     *              the teacher to be inserted.
+     * @return
+     *              the teacher.
+     * @throws TeacherDAOException
+     *              if SQL error in insert.
+     */
     @Override
     public Teacher insertTeacher(TeacherInsertDTO dto) throws TeacherDAOException {
         if (dto == null) return null;
@@ -30,6 +40,18 @@ public class TeacherServiceImpl implements ITeacherService {
         }
     }
 
+    /**
+     * Updates a teacher from the database.
+     *
+     * @param dto
+     *          the teacher to be updated.
+     * @return
+     *          the teacher.
+     * @throws TeacherDAOException
+     *          if SQL error in update.
+     * @throws TeacherNotFoundException
+     *          if teacher not found.
+     */
     @Override
     public Teacher updateTeacher(TeacherUpdateDTO dto) throws TeacherDAOException, TeacherNotFoundException {
         if (dto == null) return null;
@@ -47,6 +69,16 @@ public class TeacherServiceImpl implements ITeacherService {
         }
     }
 
+    /**
+     * Deletes a teacher from the database by teacher's id.
+     *
+     * @param id
+     *              the id of the teacher to be deleted.
+     * @throws TeacherDAOException
+     *              if SQL error in delete.
+     * @throws TeacherNotFoundException
+     *              if teacher not found.
+     */
     @Override
     public void deleteTeacher(int id) throws TeacherDAOException, TeacherNotFoundException {
         Teacher teacher;
@@ -64,6 +96,15 @@ public class TeacherServiceImpl implements ITeacherService {
         }
     }
 
+    /**
+     * Gets a list with the teachers by lastname.
+     * @param lastname
+     *              the lastname of teachers.
+     * @return
+     *              the list of teachers.
+     * @throws TeacherDAOException
+     *              if SQL error in getting from database.
+     */
     @Override
     public List<Teacher> getTeachersByLastname(String lastname) throws TeacherDAOException {
         List<Teacher> teachers;
@@ -77,6 +118,18 @@ public class TeacherServiceImpl implements ITeacherService {
         }
     }
 
+    /**
+     * Gets a teacher by id from the database.
+     *
+     * @param id
+     *              the id of the teacher.
+     * @return
+     *              the teacher.
+     * @throws TeacherDAOException
+     *              if SQL error in getting from database.
+     * @throws TeacherNotFoundException
+     *              if teacher not found.
+     */
     @Override
     public Teacher getTeacherById(int id) throws TeacherDAOException, TeacherNotFoundException {
         Teacher teacher;
@@ -93,10 +146,24 @@ public class TeacherServiceImpl implements ITeacherService {
         }
     }
 
+    /**
+     * Maps a {@link TeacherInsertDTO} to a {@link Teacher}
+     * @param dto
+     *              the TeacherInsertDTO obj.
+     * @return
+     *              the Teacher obj.
+     */
     private Teacher map(TeacherInsertDTO dto) {
         return new Teacher(null, dto.getFirstname(), dto.getLastname());
     }
 
+    /**
+     * Maps a {@link TeacherUpdateDTO} to a {@link Teacher}
+     * @param dto
+     *          the TeacherUpdateDTO obj.
+     * @return
+     *          the Teacher obj.
+     */
     private Teacher map(TeacherUpdateDTO dto) {
         return new Teacher(dto.getId(), dto.getFirstname(), dto.getLastname());
     }

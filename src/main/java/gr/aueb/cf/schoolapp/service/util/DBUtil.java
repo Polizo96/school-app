@@ -5,6 +5,9 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+/**
+ * A utility class for connection to SchoolDB.
+ */
 public class DBUtil {
 
     private static BasicDataSource ds = new BasicDataSource();
