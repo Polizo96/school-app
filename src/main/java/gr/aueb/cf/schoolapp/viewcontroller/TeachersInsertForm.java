@@ -10,7 +10,6 @@ import gr.aueb.cf.schoolapp.service.ITeacherService;
 import gr.aueb.cf.schoolapp.service.TeacherServiceImpl;
 import gr.aueb.cf.schoolapp.validator.TeacherValidator;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,9 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -104,10 +101,13 @@ public class TeachersInsertForm extends JFrame {
 
 					// Validate
 					teacherErrors = TeacherValidator.validate(dto);
+
+					String firstnameMessage = (teacherErrors.get("firstname") != null)  ? "Firstname: " + teacherErrors.get("firstname") : "";
+					String lastnameMessage = (teacherErrors.get("lastname") != null)  ? "Lastname: " + teacherErrors.get("lastname") : "";
+
 					if (!teacherErrors.isEmpty()) {
-						String firstnameErrors = teacherErrors.get("firstname");
-						JOptionPane.showMessageDialog(null,"Firstname: " + firstnameErrors + " Lastname: "
-								+ teacherErrors.get("lastname"), "Validation Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null,firstnameMessage +  " " + lastnameMessage, "Validation Error",
+								JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 
