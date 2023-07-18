@@ -8,6 +8,7 @@ import gr.aueb.cf.schoolapp.dto.TeacherInsertDTO;
 import gr.aueb.cf.schoolapp.model.Teacher;
 import gr.aueb.cf.schoolapp.service.ITeacherService;
 import gr.aueb.cf.schoolapp.service.TeacherServiceImpl;
+import gr.aueb.cf.schoolapp.validator.TeacherValidator;
 
 import java.awt.EventQueue;
 
@@ -29,6 +30,7 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Map;
 
 public class TeachersInsertForm extends JFrame {
 	private static final long serialVersionUID = 123456;
@@ -86,17 +88,28 @@ public class TeachersInsertForm extends JFrame {
 		JButton insertBtn = new JButton("Εισαγωγή");
 		insertBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String firstname = firstnameTxt.getText().trim();
-				String lastname = lastnameTxt.getText().trim();
-
-				if (firstname.equals("") || lastname.equals("")) {
-					JOptionPane.showMessageDialog(null, "Not valid input", "INSERT ERROR", JOptionPane.ERROR_MESSAGE);
-				}
+				String firstname;
+				String lastname;
+				Map<String, String> teacherErrors;
+				TeacherInsertDTO dto;
 
 				try {
-					TeacherInsertDTO dto = new TeacherInsertDTO();
+					// Data binding
+					firstname = firstnameTxt.getText().trim();
+					lastname = lastnameTxt.getText().trim();
+
+					dto = new TeacherInsertDTO();
 					dto.setFirstname(firstname);
 					dto.setLastname(lastname);
+
+					// Validate
+					teacherErrors = TeacherValidator.validate(dto);
+					if (!teacherErrors.isEmpty()) {
+						String firstnameErrors = teacherErrors.get("firstname");
+						JOptionPane.showMessageDialog(null,"Firstname: " + firstnameErrors + " Lastname: "
+								+ teacherErrors.get("lastname"), "Validation Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
 
 					Teacher teacher = teacherService.insertTeacher(dto);
 
