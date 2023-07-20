@@ -6,6 +6,12 @@ public class StudentUpdateDTO extends BaseDTO {
 
     public StudentUpdateDTO() {}
 
+    public StudentUpdateDTO(int id, String firstname, String lastname) {
+        this.setId(id);
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
     public String getFirstname() {
         return firstname;
     }

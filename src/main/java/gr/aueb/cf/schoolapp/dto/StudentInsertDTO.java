@@ -6,6 +6,11 @@ public class StudentInsertDTO {
 
     public StudentInsertDTO() {}
 
+    public StudentInsertDTO(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
     public String getFirstname() {
         return firstname;
     }
